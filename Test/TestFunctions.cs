@@ -26,7 +26,8 @@ namespace Test
 
         public static void OpenURL(string URL)
         {
-            Driver.Navigate().GoToUrl(URL);
+            //Driver.Navigate().GoToUrl(URL);
+            Driver.ExecuteScript(string.Format("document.location = '{0}'", URL.Replace("\\", "\\\\").Replace("'", "\\'")));
         }
 
         public static void WaitReady()

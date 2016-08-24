@@ -16,12 +16,9 @@ namespace Test
         public void TestCase()
         {
             TestFunctions.WaitReady();
-            //Thread.Sleep(7000);
-            //TestFunctions.OpenURL("http//www.yandex.ru");
-            TestFunctions.Driver.ExecuteScript("document.location = 'http://yandex.ru/'");
-            //Thread.Sleep(7000);
+            TestFunctions.OpenURL("http//www.yandex.ru");
+            //TestFunctions.Driver.ExecuteScript("document.location = 'http://yandex.ru/'");
             TestFunctions.WaitReady();
-            //Thread.Sleep(5000);
             //            driver.Navigate().GoToUrl("https//www.google.com/doodles/");
             Test.TestFunctions.Driver.FindElementByClassName(("input__box"));
             //     driver.FindElement(By.Id("gbqfq")).SendKeys(Keys.Enter);
