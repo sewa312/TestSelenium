@@ -27,7 +27,7 @@ namespace Test
         public static void OpenURL(string URL)
         {
             //Driver.Navigate().GoToUrl(URL);
-            Driver.ExecuteScript(string.Format("document.location = '{0}'", URL.Replace("\\", "\\\\").Replace("'", "\\'")));
+            Driver.ExecuteScript(string.Format("document.location = {0}", EscapeJsLiteral(URL)));
         }
 
         public static void WaitReady()
@@ -48,6 +48,11 @@ namespace Test
                 return Driver.FindElementByClassName(item.name);
 
             return null;
+        }
+
+        public static string EscapeJsLiteral(string literal)
+        {
+            return string.Format("'{0}'", literal.Replace("\\", "\\\\").Replace("'", "\\'"));
         }
     }
 }

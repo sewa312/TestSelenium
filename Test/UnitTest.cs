@@ -7,6 +7,7 @@ using System.IO;
 using Test;
 using System.Threading;
 using OpenQA.Selenium.Interactions;
+using System.Linq;
 
 namespace Test
 {
@@ -54,15 +55,16 @@ namespace Test
             while (!TestFunctions.FindItem(generalInfo).Text.StartsWith("Additional Information"))
             {
                 TestFunctions.FindItem(next).Click();
-                Thread.Sleep(3000);
+                Thread.Sleep(1000);
             }
 
+            string selector = ".upload-container input[type=\"file\"]";
 
-            //action.MoveToElement(TestFunctions.Driver.FindElementByXPath("//*[contains(text(), 'General Info')]")).Perform();
+            TestFunctions.Driver.ExecuteScript(string.Format(
+                "document.querySelector({0}).style.display = 'inline'", TestFunctions.EscapeJsLiteral(selector)));
+            TestFunctions.Driver.FindElementsByCssSelector(".upload-container input[type=\"file\"]").Single()
+                .SendKeys(@"C:\Users\Vsevolod\Documents\1427917234_2133326497.jpg");
             Thread.Sleep(5000);
-            //TestFunctions.Driver.FindElementByXPath("//*[contains(text(), 'Additional Information')]").Click();
-            Thread.Sleep(5000);
-            //Test.TestFunctions.Driver.FindElementByClassName(("input__box"));
         }
         
         [TestCleanup]
