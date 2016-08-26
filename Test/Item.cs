@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Test
 {
+    /// <summary>
+    /// Encapsulates a web element id or class selector.
+    /// </summary>
     class Item
     {
         public string ID;

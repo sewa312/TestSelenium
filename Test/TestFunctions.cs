@@ -25,11 +25,19 @@ namespace Test
             }
         }
 
+        /// <summary>
+        /// Opens the webpage
+        /// </summary>
+        /// <param name="URL">web page URL</param>
         public static void OpenURL(string URL)
         {
             Driver.ExecuteScript(string.Format("document.location = {0}", EscapeJsLiteral(URL)));
         }
 
+        /// <summary>
+        /// Expects the page to load
+        /// </summary>
+        /// <param name="timeout">completion waiting time</param>
         public static void WaitReady(int timeout)
         {
             Stopwatch stopwatch = new Stopwatch();
@@ -41,6 +49,11 @@ namespace Test
             }
         }
 
+        /// <summary>
+        /// Searches for an web item on ID or classname
+        /// </summary>
+        /// <param name="item">web item</param>
+        /// <returns></returns>
         public static IWebElement FindItem(Item item)
         {
             if (item.ID != "")
@@ -52,6 +65,11 @@ namespace Test
             return null;
         }
 
+        /// <summary>
+        /// Creates a string literal for Js
+        /// </summary>
+        /// <param name="literal">string to JS</param>
+        /// <returns></returns>
         public static string EscapeJsLiteral(string literal)
         {
             return string.Format("'{0}'", literal.Replace("\\", "\\\\").Replace("'", "\\'"));
