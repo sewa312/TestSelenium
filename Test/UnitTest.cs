@@ -17,9 +17,9 @@ namespace Test
         [TestInitialize]
         public void TestInitialize()
         {
-            TestFunctions.WaitReady();
+            TestFunctions.WaitReady(10000);
             TestFunctions.OpenURL("https://appulatebeta.com");
-            TestFunctions.WaitReady();
+            TestFunctions.WaitReady(10000);
         }
         [TestMethod]
         public void TestCase()
@@ -40,7 +40,7 @@ namespace Test
             Item next = new Item("", "next");
 
             TestFunctions.FindItem(signIn).Click();
-            TestFunctions.WaitReady();
+            TestFunctions.WaitReady(10000);
             TestFunctions.FindItem(loginField).Clear();
             TestFunctions.FindItem(loginField).SendKeys("david.smith.appulatetest@appulatemail.com");
             Thread.Sleep(1000);
@@ -48,7 +48,7 @@ namespace Test
             TestFunctions.FindItem(passwordField).SendKeys("123321");
             Thread.Sleep(1000);
             TestFunctions.FindItem(signButton).Click();
-            TestFunctions.WaitReady();
+            TestFunctions.WaitReady(10000);
             TestFunctions.FindItem(hiddenList).Click();
             TestFunctions.FindItem(fullForm).Click();
             Thread.Sleep(3000);
@@ -63,7 +63,7 @@ namespace Test
             TestFunctions.Driver.ExecuteScript(string.Format(
                 "document.querySelector({0}).style.display = 'inline'", TestFunctions.EscapeJsLiteral(selector)));
             TestFunctions.Driver.FindElementsByCssSelector(".upload-container input[type=\"file\"]").Single()
-                .SendKeys(@"C:\Users\Vsevolod\Documents\1427917234_2133326497.jpg");
+                .SendKeys(Path.GetFullPath("so_slow.jpg"));
             Thread.Sleep(5000);
         }
         

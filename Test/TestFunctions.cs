@@ -3,6 +3,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Remote;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -19,21 +20,22 @@ namespace Test
             get
             {
                 if (driver == null)
-                    driver = new ChromeDriver(@"C:\Users\Vsevolod\Documents\TestSelenium\Test");
+                    driver = new ChromeDriver(".");
                 return driver;
             }
         }
 
         public static void OpenURL(string URL)
         {
-            //Driver.Navigate().GoToUrl(URL);
             Driver.ExecuteScript(string.Format("document.location = {0}", EscapeJsLiteral(URL)));
         }
 
-        public static void WaitReady()
+        public static void WaitReady(int timeout)
         {
+            Stopwatch stopwatch = new Stopwatch();
             Func<bool> ready = () => (bool)Driver.ExecuteScript("return document.readyState == 'complete'");
-            while (!ready())
+            stopwatch.Start();
+            while (!ready() && stopwatch.ElapsedMilliseconds < timeout)
             {
                 Thread.Sleep(100);
             }
